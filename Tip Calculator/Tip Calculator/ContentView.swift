@@ -16,7 +16,7 @@ struct ContentView: View {
     }
     var body: some View {
         ZStack {
-            LinearGradient(colors: [.purple, .blue, .green], startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(colors: [.blue, .white], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             VStack {
                 Spacer()
@@ -52,8 +52,8 @@ private func doubleTextField(_ placeholder: String, value: Binding<Double?>, typ
         Text(type == TextFieldType.money ? Locale.current.currencySymbol ?? "$": "%")
             .font(.largeTitle)
             .foregroundColor(.secondary)
-        TextField(placeholder, value: value, format: .number)
-            .keyboardType(.numberPad)
+        TextField(placeholder, value: value, format: type == TextFieldType.percentage ? .number : .localizedDouble(locale: Locale.current))
+            .keyboardType(.decimalPad)
             .multilineTextAlignment(.trailing)
             .font(.largeTitle)
             .monospacedDigit()
